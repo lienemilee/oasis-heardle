@@ -1,0 +1,369 @@
+:root {
+  --bg: #121212;
+  --surface: #1e1e24;
+  --surface-hover: #282830;
+  --border: #2e2e38;
+  --text: #a1a1aa;
+  --text-h: #ffffff;
+  --accent: #eab308; /* Classic Oasis gold/amber */
+  --accent-hover: #ca8a04;
+  --success: #22c55e;
+  --error: #ef4444;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app {
+  max-width: 600px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 32px;
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--text-h);
+  letter-spacing: 1px;
+}
+
+.logo span {
+  color: var(--accent);
+}
+
+.header-label {
+  font-size: 0.7rem;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+}
+
+/* Main Game Area */
+.game {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: var(--text-h);
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  margin-bottom: 24px;
+}
+
+/* Timer */
+.timer {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 24px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timer-label {
+  font-size: 0.65rem;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+}
+
+.timer-value {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--text-h);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Audio Player Card */
+.audio-box {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-align: left;
+  margin-bottom: 24px;
+}
+
+.play-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  border: none;
+  transition: transform 0.15s ease;
+}
+
+.play-icon:hover {
+  transform: scale(1.05);
+}
+
+.audio-box strong {
+  color: var(--text-h);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.audio-box p {
+  font-size: 0.85rem;
+}
+
+.test-answer {
+  font-size: 0.8rem;
+  background: rgba(234, 179, 8, 0.15);
+  color: var(--accent);
+  padding: 6px 12px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  font-family: monospace;
+}
+
+/* Buttons */
+.start-button,
+.submit-button {
+  background: var(--accent);
+  color: #000;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 28px;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.start-button:hover,
+.submit-button:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.submit-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Clip Length Selector */
+.clip-options {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.clip-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.clip-buttons button {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.clip-buttons button.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(234, 179, 8, 0.1);
+}
+
+/* Guess Input */
+.guess-area {
+  width: 100%;
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.guess-area input {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-h);
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.guess-area input:focus {
+  border-color: var(--accent);
+}
+
+.guess-count {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+/* Guess History */
+.guess-history {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.guess-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 12px 16px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-h);
+  font-size: 0.95rem;
+}
+
+/* Result Banner */
+.result {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 24px;
+  border-radius: 12px;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.result h2 {
+  color: var(--text-h);
+  margin-bottom: 8px;
+}
+
+.result p {
+  margin-bottom: 16px;
+}
+
+/* Settings & Toggles */
+.settings {
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+  margin-top: 32px;
+}
+
+.setting-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 16px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+.setting-row strong {
+  color: var(--text-h);
+  display: block;
+  font-size: 0.95rem;
+}
+
+.setting-row p {
+  font-size: 0.8rem;
+}
+
+.toggle {
+  width: 44px;
+  height: 24px;
+  background: var(--border);
+  border-radius: 999px;
+  border: none;
+  padding: 2px;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.2s;
+}
+
+.toggle span {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+
+.toggle.on {
+  background: var(--accent);
+}
+
+.toggle.on span {
+  transform: translateX(20px);
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
+  padding-top: 32px;
+  color: var(--text);
+}
+
+footer span {
+  color: var(--accent);
+}
