@@ -386,11 +386,34 @@ function App() {
   }, [status, clipLength, includeBonus, includeUnreleased, includeBsides])
 
   function handleClipSelect(length, index) {
+    // If clicking an already unlocked or current clip, just change length
     if (index <= unlockedIndex) {
       setClipLength(length)
-    } else if (status === 'playing' && index === unlockedIndex + 1) {
-      setUnlockedIndex(index)
-      setClipLength(length)
+      return
+    }
+
+    // Strictly sequential: can only unlock the immediate next step
+    if (status === 'playing' && index === unlockedIndex + 1) {
+      const skipEntry = {
+        song: 'skip',
+        correct: false,
+        isSkip: true
+      }
+
+      const updatedGuesses = [...guesses, skipEntry]
+      setGuesses(updatedGuesses)
+
+      if (updatedGuesses.length >= CLIP_LENGTHS.length) {
+        setStatus('lost')
+        if (audioRef.current) audioRef.current.pause()
+
+        setStreak(0)
+        setUsedSongs([])
+        localStorage.setItem('oasis_heardle_streak', '0')
+      } else {
+        setUnlockedIndex(index)
+        setClipLength(length)
+      }
     }
   }
 
@@ -405,7 +428,8 @@ function App() {
 
     const updatedGuesses = [...guesses, {
       song: guess.trim(),
-      correct: isCorrect
+      correct: isCorrect,
+      isSkip: false
     }]
 
     setGuesses(updatedGuesses)
@@ -454,7 +478,7 @@ function App() {
   function handleGiveUp() {
     if (status !== 'playing') return
 
-    setGuesses([...guesses, { song: 'gave up..', correct: false }])
+    setGuesses([...guesses, { song: 'gave up', correct: false, isSkip: false }])
     setStatus('lost')
 
     if (audioRef.current) audioRef.current.pause()
@@ -471,7 +495,9 @@ function App() {
       <audio ref={audioRef} src={audioSrc} preload="auto" />
 
       <header className="header">
-        <div className="logo">oasis<span> heardle</span></div>
+        <div className="logo" onClick={resetActiveRound} title="Back to start">
+          oasis<span> heardle</span>
+        </div>
         <div className="header-progress">
           <strong>{activeUsedCount}</strong> / {activeSongPool.length}
         </div>
@@ -564,21 +590,22 @@ function App() {
                 <div className="clip-options">
                   <div className="clip-buttons">
                     {CLIP_LENGTHS.map((length, index) => {
-                      const isLocked = status === 'playing'
-                        ? index > unlockedIndex + 1
-                        : index > unlockedIndex
+                        // Allow clicking any button ahead of current unlockedIndex during gameplay
+                        const isLocked = status === 'playing'
+                          ? index > unlockedIndex + 1
+                          : index > unlockedIndex
 
-                      return (
-                        <button
-                          key={length}
-                          className={`${clipLength === length ? 'active' : ''} ${isLocked ? 'locked' : ''}`}
-                          onClick={() => handleClipSelect(length, index)}
-                          disabled={isLocked}
-                        >
-                          {length}s
-                        </button>
-                      )
-                    })}
+                        return (
+                          <button
+                            key={length}
+                            className={`${clipLength === length ? 'active' : ''} ${isLocked ? 'locked' : ''}`}
+                            onClick={() => handleClipSelect(length, index)}
+                            disabled={isLocked}
+                          >
+                            {length}s
+                          </button>
+                        )
+                      })}
                   </div>
                 </div>
 
@@ -654,18 +681,18 @@ function App() {
               <div className="guess-history">
                 {guesses.slice().reverse().map((item, index) => {
                   const actualNumber = guesses.length - index
-                  const statusColor = item.correct ? '#11d65a' : '#d32929'
+                  const statusColor = item.isSkip ? '#a3a3a3' : (item.correct ? '#11d65a' : '#d32929')
 
                   return (
                     <div className="guess-item" key={actualNumber}>
                       <span>
                         {actualNumber}.{' '}
-                        <span style={{ color: statusColor }}>
+                        <span style={{ color: statusColor, fontStyle: item.isSkip ? 'italic' : 'normal' }}>
                           {item.song}
                         </span>
                       </span>
                       <span>
-                        {item.correct ? '✅' : '❌'}
+                        {item.isSkip ? '⏭️' : (item.correct ? '✅' : '❌')}
                       </span>
                     </div>
                   )
