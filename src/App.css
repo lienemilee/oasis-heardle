@@ -378,7 +378,7 @@ footer span {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   margin: 4px 0;
 }
-..mode-toggles {
+.mode-toggles {
   display: flex;
   justify-content: center;
   gap: 0.5rem;
