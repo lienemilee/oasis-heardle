@@ -214,22 +214,45 @@ function getFilename(songObj) {
     .replace(/^_|_$/g, '') + '.mp3'
 }
 
+function highlightMatch(title, query) {
+  if (!query) return title
+  const escapedQuery = query.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
+  const regex = new RegExp(`(${escapedQuery})`, 'gi')
+  const parts = title.split(regex)
+
+  return parts.map((part, i) => 
+    regex.test(part) ? (
+      <span key={i} style={{ color: '#11d65a', fontWeight: 'bold' }}>{part}</span>
+    ) : (
+      part
+    )
+  )
+}
+
 function App() {
   const [clipLength, setClipLength] = useState(1)
   const [unlockedIndex, setUnlockedIndex] = useState(0)
 
-  const [answerObj, setAnswerObj] = useState(null)
   const [guess, setGuess] = useState('')
-  const [guesses, setGuesses] = useState([])
+  const [showDropdown, setShowDropdown] = useState(false)
+  
+  const [showHints, setShowHints] = useState(() => {
+    return localStorage.getItem('oasis_heardle_hints') !== 'false'
+  })
+
   const [status, setStatus] = useState('ready')
   const [isPlayingAudio, setIsPlayingAudio] = useState(false)
+  const [guesses, setGuesses] = useState([])
+  const [answerObj, setAnswerObj] = useState(null)
 
   const [includeBonus, setIncludeBonus] = useState(() => {
     return localStorage.getItem('oasis_heardle_bonus') === 'true'
   })
+
   const [includeUnreleased, setIncludeUnreleased] = useState(() => {
     return localStorage.getItem('oasis_heardle_unreleased') === 'true'
   })
+
   const [includeBsides, setIncludeBsides] = useState(() => {
     return localStorage.getItem('oasis_heardle_bsides') === 'true'
   })
@@ -237,10 +260,11 @@ function App() {
   const [streak, setStreak] = useState(() => {
     return parseInt(localStorage.getItem('oasis_heardle_streak') || '0', 10)
   })
+
   const [maxStreak, setMaxStreak] = useState(() => {
     return parseInt(localStorage.getItem('oasis_heardle_max_streak') || '0', 10)
   })
-
+  
   const [usedSongs, setUsedSongs] = useState([])
 
   const audioRef = useRef(null)
@@ -253,6 +277,12 @@ function App() {
     if (song.isBside && !includeBsides) return false
     return true
   })
+
+  const matchingSongs = !showHints || guess.trim() === '' || status !== 'playing'
+    ? []
+    : activeSongPool.filter(song =>
+        song.title.toLowerCase().includes(guess.toLowerCase())
+      ).slice(0, 6)
 
   const activeUsedCount = usedSongs.filter(title =>
     activeSongPool.some(song => song.title === title)
@@ -298,6 +328,7 @@ function App() {
     setAnswerObj(null)
     setGuesses([])
     setGuess('')
+    setShowDropdown(false)
     setStatus('ready')
   }
 
@@ -314,6 +345,7 @@ function App() {
 
     setAnswerObj(randomSong)
     setGuess('')
+    setShowDropdown(false)
     setGuesses([])
     setClipLength(CLIP_LENGTHS[0])
     setUnlockedIndex(0)
@@ -354,6 +386,15 @@ function App() {
 
   useEffect(() => {
     function handleKeyDown(e) {
+      if ((e.key === 'h' || e.key === 'H') && document.activeElement?.tagName !== 'INPUT') {
+        e.preventDefault()
+        const nextHints = !showHints
+        setShowHints(nextHints)
+        localStorage.setItem('oasis_heardle_hints', String(nextHints))
+        if (!nextHints) setShowDropdown(false)
+        return
+      }
+
       if (status === 'ready') {
         if (e.key === ' ' || e.code === 'Space' || e.key === 'Enter') {
           e.preventDefault()
@@ -383,19 +424,17 @@ function App() {
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [status, clipLength, includeBonus, includeUnreleased, includeBsides])
+  }, [status, clipLength, includeBonus, includeUnreleased, includeBsides, showHints])
 
   function handleClipSelect(length, index) {
-    // If clicking an already unlocked or current clip, just change length
     if (index <= unlockedIndex) {
       setClipLength(length)
       return
     }
 
-    // Strictly sequential: can only unlock the immediate next step
     if (status === 'playing' && index === unlockedIndex + 1) {
       const skipEntry = {
-        song: 'skip',
+        song: '[skip]',
         correct: false,
         isSkip: true
       }
@@ -434,6 +473,7 @@ function App() {
 
     setGuesses(updatedGuesses)
     setGuess('')
+    setShowDropdown(false)
 
     if (inputRef.current) {
       inputRef.current.blur()
@@ -480,6 +520,7 @@ function App() {
 
     setGuesses([...guesses, { song: 'gave up', correct: false, isSkip: false }])
     setStatus('lost')
+    setShowDropdown(false)
 
     if (audioRef.current) audioRef.current.pause()
 
@@ -549,7 +590,12 @@ function App() {
                       ? `playing ${clipLength}s clip` 
                       : `play clip (${clipLength}s)`}
                 </strong>
-                <p>press space to play, enter to guess</p>
+                <p style={{ margin: 0 }}>
+                  press space to play, enter to guess, hints with [h]. HINTS:{' '}
+                  <span style={{ color: showHints ? '#11d65a' : '#d32929', fontWeight: 'bold' }}>
+                    {showHints ? 'ON' : 'OFF'}
+                  </span>
+                </p>
               </div>
             </div>
 
@@ -590,58 +636,90 @@ function App() {
                 <div className="clip-options">
                   <div className="clip-buttons">
                     {CLIP_LENGTHS.map((length, index) => {
-                        // Allow clicking any button ahead of current unlockedIndex during gameplay
-                        const isLocked = status === 'playing'
-                          ? index > unlockedIndex + 1
-                          : index > unlockedIndex
+                      const isLocked = status === 'playing'
+                        ? index > unlockedIndex + 1
+                        : index > unlockedIndex
 
-                        return (
-                          <button
-                            key={length}
-                            className={`${clipLength === length ? 'active' : ''} ${isLocked ? 'locked' : ''}`}
-                            onClick={() => handleClipSelect(length, index)}
-                            disabled={isLocked}
-                          >
-                            {length}s
-                          </button>
-                        )
-                      })}
+                      return (
+                        <button
+                          key={length}
+                          className={`${clipLength === length ? 'active' : ''} ${isLocked ? 'locked' : ''}`}
+                          onClick={() => handleClipSelect(length, index)}
+                          disabled={isLocked}
+                        >
+                          {length}s
+                        </button>
+                      )
+                    })}
                   </div>
                 </div>
 
-                <form
-                  className="guess-area"
-                  onSubmit={(e) => {
-                    e.preventDefault()
-                    if (status === 'playing') submitGuess(e)
-                    else startRound()
-                  }}
-                >
-                  <input
-                    ref={inputRef}
-                    type="text"
-                    placeholder={status === 'playing' ? "take a guess..." : "press [enter] to try again"}
-                    value={guess}
-                    onChange={event => setGuess(event.target.value)}
-                    disabled={status !== 'playing'}
-                    autoComplete="off"
-                  />
-
-                  {status === 'playing' ? (
-                    <>
-                      <button className="submit-button" type="submit">
-                        guess
-                      </button>
-                      <button type="button" className="skip-button" onClick={handleGiveUp}>
-                        give up
-                      </button>
-                    </>
-                  ) : (
-                    <button type="button" className="submit-button" onClick={startRound}>
-                      again!!
-                    </button>
+                {/* Autocomplete Dropdown & Guess Form Wrapper */}
+                <div style={{ position: 'relative', width: '100%' }}>
+                  {showHints && showDropdown && matchingSongs.length > 0 && (
+                    <div className="autocomplete-dropdown">
+                      {matchingSongs.map((song, idx) => (
+                        <div 
+                          key={idx} 
+                          className="autocomplete-item"
+                          onMouseDown={(e) => e.preventDefault()}
+                          onClick={() => {
+                            setGuess(song.title)
+                            setShowDropdown(false)
+                            if (inputRef.current) {
+                              inputRef.current.focus()
+                            }
+                          }}
+                        >
+                          {highlightMatch(song.title, guess)}
+                        </div>
+                      ))}
+                    </div>
                   )}
-                </form>
+
+                  <form
+                    className="guess-area"
+                    onSubmit={(e) => {
+                      e.preventDefault()
+                      if (status === 'playing') {
+                        setShowDropdown(false)
+                        submitGuess(e)
+                      } else {
+                        startRound()
+                      }
+                    }}
+                  >
+                    <input
+                      ref={inputRef}
+                      type="text"
+                      placeholder={status === 'playing' ? "take a guess..." : "press [enter] to try again"}
+                      value={guess}
+                      onChange={event => {
+                        setGuess(event.target.value)
+                        setShowDropdown(true)
+                      }}
+                      onFocus={() => setShowDropdown(true)}
+                      onBlur={() => setShowDropdown(false)}
+                      disabled={status !== 'playing'}
+                      autoComplete="off"
+                    />
+
+                    {status === 'playing' ? (
+                      <>
+                        <button className="submit-button" type="submit">
+                          guess
+                        </button>
+                        <button type="button" className="skip-button" onClick={handleGiveUp}>
+                          give up
+                        </button>
+                      </>
+                    ) : (
+                      <button type="button" className="submit-button" onClick={startRound}>
+                        again!!
+                      </button>
+                    )}
+                  </form>
+                </div>
 
                 <p className="guess-count">
                   {guesses.length} / {CLIP_LENGTHS.length} guesses used
