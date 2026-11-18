@@ -276,13 +276,13 @@ html, body {
 .guess-history {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 
 .guess-item {
   background-color: #161619;
   border: 1px solid #222226;
-  padding: 6px 12px;
+  padding: 10px 14px;
   border-radius: 6px;
   display: flex;
   justify-content: space-between;
@@ -406,4 +406,40 @@ footer span {
   background-color: #facc15;
   color: #000000;
   border-color: #facc15;
+}
+
+.autocomplete-dropdown {
+  text-align: left;
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  background-color: #1a1a1e;
+  border: 1px solid #2b2b31;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  max-height: 220px;
+  overflow-y: auto;
+  z-index: 100;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  text-align: left;
+}
+
+.autocomplete-item {
+  padding: 12px 16px;
+  font-size: 0.9rem;
+  color: #ddd;
+  cursor: pointer;
+  border-bottom: 1px solid #26262a;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.autocomplete-item:last-child {
+  border-bottom: none;
+}
+
+.autocomplete-item:hover {
+  background-color: #2b2b31;
+  color: #fff;
 }
