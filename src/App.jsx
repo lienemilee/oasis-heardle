@@ -110,103 +110,83 @@ const studioSongs = [
   { title: "Headshrinker", file: "headshrinker.mp3", album: "The Masterplan", image: "/images/the_masterplan.jpg" },
   { title: "The Masterplan", file: "the_masterplan.mp3", album: "The Masterplan", image: "/images/the_masterplan.jpg" },
 
-  // Supersonic
-  { title: "Take Me Away", album: "B-Sides", image: "/images/supersonic.jpg", file: "take_me_away.mp3" },
-  { title: "I Will Believe (Live)", album: "B-Sides", image: "/images/supersonic.jpg", file: "i_will_believe_live.mp3" },
-  { title: "Columbia (White Label Demo)", album: "B-Sides", image: "/images/supersonic.jpg", file: "columbia_white_label_demo.mp3" },
+  // B-Sides
+  { title: "Take Me Away", album: "B-Sides", image: "/images/supersonic.jpg", file: "take_me_away.mp3", isBside: true },
+  { title: "I Will Believe", album: "B-Sides", image: "/images/supersonic.jpg", file: "i_will_believe_live.mp3", isBside: true },
+  { title: "Columbia (White Label Demo)", album: "B-Sides", image: "/images/supersonic.jpg", file: "columbia_white_label_demo.mp3", isBside: true },
+  { title: "D'Yer Wanna Be a Spaceman?", album: "B-Sides", image: "/images/shakermaker.jpg", file: "dyer_wanna_be_a_spaceman.mp3", isBside: true },
+  { title: "Alive (8 Track Demo)", album: "B-Sides", image: "/images/shakermaker.jpg", file: "alive_8_track_demo.mp3", isBside: true },
+  { title: "Up In The Sky (Acoustic)", album: "B-Sides", image: "/images/live_forever.jpg", file: "up_in_the_sky_acoustic.mp3", isBside: true },
+  { title: "Cloudburst", album: "B-Sides", image: "/images/live_forever.jpg", file: "cloudburst.mp3", isBside: true },
+  { title: "Whatever", album: "(it was just a single)", image: "/images/whatever.jpg", file: "whatever.mp3", isBside: true },
+  { title: "It's Better People", album: "B-Sides", image: "/images/roll_with_it.jpg", file: "its_better_people.mp3", isBside: true },
+  { title: "Round Are Way", album: "B-Sides", image: "/images/wonderwall.jpg", file: "round_are_way.mp3", isBside: true },
+  { title: "Step Out", album: "B-Sides", image: "/images/dont_look_back_in_anger.jpg", file: "step_out.mp3", isBside: true },
+  { title: "Cum On Feel The Noize", album: "B-Sides", image: "/images/dont_look_back_in_anger.jpg", file: "cum_on_feel_the_noize.mp3", isBside: true },
+  { title: "Angel Child (Demo)", album: "B-Sides", image: "/images/dyou_know_what_i_mean.jpg", file: "angel_child_demo.mp3", isBside: true },
+  { title: "Heroes", album: "B-Sides", image: "/images/dyou_know_what_i_mean.jpg", file: "heroes.mp3", isBside: true },
+  { title: "(I Got) The Fever", album: "B-Sides", image: "/images/stand_by_me.jpg", file: "i_got_the_fever.mp3", isBside: true },
+  { title: "My Sister Lover", album: "B-Sides", image: "/images/stand_by_me.jpg", file: "my_sister_lover.mp3", isBside: true },
+  { title: "The Fame", album: "B-Sides", image: "/images/all_around_the_world.jpg", file: "the_fame.mp3", isBside: true },
+  { title: "Flashbax", album: "B-Sides", image: "/images/all_around_the_world.jpg", file: "flashbax.mp3", isBside: true },
+  { title: "Street Fighting Man", album: "B-Sides", image: "/images/all_around_the_world.jpg", file: "street_fighting_man.mp3", isBside: true },
+  { title: "Let's All Make Believe", album: "B-Sides", image: "/images/go_let_it_out.jpg", file: "lets_all_make_believe.mp3", isBside: true },
+  { title: "(As Long As They've Got) Cigarettes In Hell", album: "B-Sides", image: "/images/go_let_it_out.jpg", file: "cigarettes_in_hell.mp3", isBside: true },
+  { title: "One Way Road", album: "B-Sides", image: "/images/who_feels_love.jpg", file: "one_way_road.mp3", isBside: true },
+  { title: "Helter Skelter", album: "B-Sides", image: "/images/who_feels_love.jpg", file: "helter_skelter.mp3", isBside: true },
+  { title: "Carry Us All", album: "B-Sides", image: "/images/sunday_morning_call.jpg", file: "carry_us_all.mp3", isBside: true },
+  { title: "Full On", album: "B-Sides", image: "/images/sunday_morning_call.jpg", file: "full_on.mp3", isBside: true },
+  { title: "Just Getting Older", album: "B-Sides", image: "/images/the_hindu_times.jpg", file: "just_getting_older.mp3", isBside: true },
+  { title: "Idler's Dream", album: "B-Sides", image: "/images/the_hindu_times.jpg", file: "idlers_dream.mp3", isBside: true },
+  { title: "Thank You For The Good Times", album: "B-Sides", image: "/images/stop_crying_your_heart_out.jpg", file: "thank_you_for_the_good_times.mp3", isBside: true },
+  { title: "Shout It Out Loud", album: "B-Sides", image: "/images/stop_crying_your_heart_out.jpg", file: "shout_it_out_loud.mp3", isBside: true },
+  { title: "My Generation", album: "B-Sides", image: "/images/little_by_little_she_is_love.jpg", file: "my_generation.mp3", isBside: true },
+  { title: "(You've Got) The Heart Of A Star", album: "B-Sides", image: "/images/songbird.jpg", file: "the_heart_of_a_star.mp3", isBside: true },
+  { title: "Eyeball Tickler", album: "B-Sides", image: "/images/lyla.jpg", file: "eyeball_tickler.mp3", isBside: true },
+  { title: "Won't Let You Down", album: "B-Sides", image: "/images/lyla.jpg", file: "wont_let_you_down.mp3", isBside: true },
+  { title: "Pass Me Down The Wine", album: "B-Sides", image: "/images/the_importance_of_being_idle.jpg", file: "pass_me_down_the_wine.mp3", isBside: true },
+  { title: "The Quiet Ones", album: "B-Sides", image: "/images/the_importance_of_being_idle.jpg", file: "the_quiet_ones.mp3", isBside: true },
+  { title: "Sittin' Here In Silence (On My Own)", album: "B-Sides", image: "/images/let_there_be_love.jpg", file: "sittin_here_in_silence.mp3", isBside: true },
+  { title: "Lord Don't Slow Me Down", album: "(i think it's just a single lmao)", image: "/images/lord_dont_slow_me_down.jpg", file: "lord_dont_slow_me_down.mp3", isBside: true },
+  { title: "The Meaning Of Soul (Live at City of Manchester Stadium '05)", album: "B-Sides", image: "/images/lord_dont_slow_me_down.jpg", file: "the_meaning_of_soul_live.mp3", isBside: true },
+  { title: "Falling Down (The Chemical Brothers Remix)", album: "B-Sides", image: "/images/falling_down.jpg", file: "falling_down_chemical_brothers_remix.mp3", isBside: true },
+  { title: "I'm Outta Time (Remix)", album: "B-Sides", image: "/images/im_outta_time.jpg", file: "im_outta_time_remix.mp3", isBside: true },
+  { title: "The Shock Of The Lightning (The Jagz Kooner Remix)", album: "B-Sides", image: "/images/the_shock_of_the_lightning.jpg", file: "the_shock_of_the_lightning_jagz_kooner_remix.mp3", isBside: true },
+  { title: "Those Swollen Hand Blues", album: "B-Sides", image: "/images/falling_down.jpg", file: "those_swollen_hand_blues.mp3", isBside: true },
+  { title: "Falling Down (The Gibb Mix)", album: "B-Sides", image: "/images/falling_down.jpg", file: "falling_down_the_gibb_mix.mp3", isBside: true },
+  { title: "Falling Down (The Prodigy Version)", album: "B-Sides", image: "/images/falling_down.jpg", file: "falling_down_the_prodigy_version.mp3", isBside: true },
 
-  // Shakermaker
-  { title: "D'Yer Wanna Be a Spaceman?", album: "B-Sides", image: "/images/shakermaker.jpg", file: "dyer_wanna_be_a_spaceman.mp3" },
-  { title: "Alive (8 Track Demo)", album: "B-Sides", image: "/images/shakermaker.jpg", file: "alive_8_track_demo.mp3" },
-  { title: "Bring It On Down (Live)", album: "B-Sides", image: "/images/shakermaker.jpg", file: "bring_it_on_down_live.mp3" },
+  // Bonus tracks
+  { title: "Sad Song", file: "sad_song.mp3", album: "Definitely Maybe (Bonus)", image: "/images/definitely_maybe.jpg", isBonus: true },
+  { title: "Bonehead's Bank Holiday", file: "boneheads_bank_holiday.mp3", album: "(What's the Story) Morning Glory? (Bonus)", image: "/images/morning_glory.jpg", isBonus: true },
+  { title: "The Cage", file: "the_cage.mp3", album: "Heathen Chemistry (Hidden Track)", image: "/images/heathen_chemistry.jpg", isBonus: true },
+  { title: "Can Y'See It Now? (I Can See It Now!!)", file: "can_ysee_it_now.mp3", album: "Don't Believe the Truth (Bonus)", image: "/images/dont_believe_the_truth.jpg", isBonus: true },
+  { title: "I Believe in All", file: "i_believe_in_all.mp3", album: "Dig Out Your Soul (Bonus)", image: "/images/dig_out_your_soul.jpg", isBonus: true },
+  { title: "Boy with the Blues", file: "boy_with_the_blues.mp3", album: "Dig Out Your Soul (Bonus)", image: "/images/dig_out_your_soul.jpg", isBonus: true },
+  { title: "Strange Thing", file: "strange_thing.mp3", album: "Definitely Maybe (Bonus)", image: "/images/definitely_maybe.jpg", isBonus: true },
+  { title: "If We Shadows (Demo)", file: "if_we_shadows.mp3", album: "Be Here Now (Bonus)", image: "/images/be_here_now.jpg", isBonus: true },
+  { title: "Help! (Live in LA)", file: "help_live_la.mp3", album: "Morning Glory (Bonus)", image: "/images/morning_glory.jpg", isBonus: true },
+  { title: "If We Shadows", file: "if_we_shadows_full_band.mp3", album: "Be Here Now (Bonus)", image: "/images/be_here_now.jpg", isBonus: true },
+  { title: "Song 2", file: "song_2.mp3", album: "Blur", image: "/images/blur.jpg", isBonus: true },
 
-  // Live Forever
-  { title: "Up In The Sky (Acoustic)", album: "B-Sides", image: "/images/live_forever.jpg", file: "up_in_the_sky_acoustic.mp3" },
-  { title: "Cloudburst", album: "B-Sides", image: "/images/live_forever.jpg", file: "cloudburst.mp3" },
-  { title: "Supersonic (Live April '94)", album: "B-Sides", image: "/images/live_forever.jpg", file: "supersonic_live_april_94.mp3" },
-
-  // Whatever
-  { title: "Whatever", album: "(it was just a single)", image: "/images/whatever.jpg", file: "whatever.mp3" },
-
-  // Roll With It
-  { title: "It's Better People", album: "B-Sides", image: "/images/roll_with_it.jpg", file: "its_better_people.mp3" },
-  { title: "Live Forever (Live at Glastonbury '95)", album: "B-Sides", image: "/images/roll_with_it.jpg", file: "live_forever_live_glastonbury_95.mp3" },
-
-  // Wonderwall
-  { title: "Round Are Way", album: "B-Sides", image: "/images/wonderwall.jpg", file: "round_are_way.mp3" },
-
-  // Don't Look Back In Anger
-  { title: "Step Out", album: "B-Sides", image: "/images/dont_look_back_in_anger.jpg", file: "step_out.mp3" },
-  { title: "Cum On Feel The Noize", album: "B-Sides", image: "/images/dont_look_back_in_anger.jpg", file: "cum_on_feel_the_noize.mp3" },
-
-  // D'You Know What I Mean?
-  { title: "Angel Child (Demo)", album: "B-Sides", image: "/images/dyou_know_what_i_mean.jpg", file: "angel_child_demo.mp3" },
-  { title: "Heroes", album: "B-Sides", image: "/images/dyou_know_what_i_mean.jpg", file: "heroes.mp3" },
-
-  // Stand By Me
-  { title: "(I Got) The Fever", album: "B-Sides", image: "/images/stand_by_me.jpg", file: "i_got_the_fever.mp3" },
-  { title: "My Sister Lover", album: "B-Sides", image: "/images/stand_by_me.jpg", file: "my_sister_lover.mp3" },
-
-  // All Around The World
-  { title: "The Fame", album: "B-Sides", image: "/images/all_around_the_world.jpg", file: "the_fame.mp3" },
-  { title: "Flashbax", album: "B-Sides", image: "/images/all_around_the_world.jpg", file: "flashbax.mp3" },
-  { title: "Street Fighting Man", album: "B-Sides", image: "/images/all_around_the_world.jpg", file: "street_fighting_man.mp3" },
-
-  // Go Let It Out
-  { title: "Let's All Make Believe", album: "B-Sides", image: "/images/go_let_it_out.jpg", file: "lets_all_make_believe.mp3" },
-  { title: "(As Long As They've Got) Cigarettes In Hell", album: "B-Sides", image: "/images/go_let_it_out.jpg", file: "cigarettes_in_hell.mp3" },
-
-  // Who Feels Love?
-  { title: "One Way Road", album: "B-Sides", image: "/images/who_feels_love.jpg", file: "one_way_road.mp3" },
-  { title: "Helter Skelter", album: "B-Sides", image: "/images/who_feels_love.jpg", file: "helter_skelter.mp3" },
-
-  // Sunday Morning Call
-  { title: "Carry Us All", album: "B-Sides", image: "/images/sunday_morning_call.jpg", file: "carry_us_all.mp3" },
-  { title: "Full On", album: "B-Sides", image: "/images/sunday_morning_call.jpg", file: "full_on.mp3" },
-
-  // The Hindu Times
-  { title: "Just Getting Older", album: "B-Sides", image: "/images/the_hindu_times.jpg", file: "just_getting_older.mp3" },
-  { title: "Idler's Dream", album: "B-Sides", image: "/images/the_hindu_times.jpg", file: "idlers_dream.mp3" },
-
-  // Stop Crying Your Heart Out
-  { title: "Thank You For The Good Times", album: "B-Sides", image: "/images/stop_crying_your_heart_out.jpg", file: "thank_you_for_the_good_times.mp3" },
-  { title: "Shout It Out Loud", album: "B-Sides", image: "/images/stop_crying_your_heart_out.jpg", file: "shout_it_out_loud.mp3" },
-
-  // Little By Little/She Is Love
-  { title: "My Generation", album: "B-Sides", image: "/images/little_by_little_she_is_love.jpg", file: "my_generation.mp3" },
-
-  // Songbird
-  { title: "(You've Got) The Heart Of A Star", album: "B-Sides", image: "/images/songbird.jpg", file: "the_heart_of_a_star.mp3" },
-  { title: "Columbia (Live)", album: "B-Sides", image: "/images/songbird.jpg", file: "columbia_live.mp3" },
-
-  // Lyla
-  { title: "Eyeball Tickler", album: "B-Sides", image: "/images/lyla.jpg", file: "eyeball_tickler.mp3" },
-  { title: "Won't Let You Down", album: "B-Sides", image: "/images/lyla.jpg", file: "wont_let_you_down.mp3" },
-
-  // The Importance Of Being Idle
-  { title: "Pass Me Down The Wine", album: "B-Sides", image: "/images/the_importance_of_being_idle.jpg", file: "pass_me_down_the_wine.mp3" },
-  { title: "The Quiet Ones", album: "B-Sides", image: "/images/the_importance_of_being_idle.jpg", file: "the_quiet_ones.mp3" },
-
-  // Let There Be Love
-  { title: "Sittin' Here In Silence (On My Own)", album: "B-Sides", image: "/images/let_there_be_love.jpg", file: "sittin_here_in_silence.mp3" },
-  { title: "Rock 'n' Roll Star (Live at City of Manchester Stadium)", album: "B-Sides", image: "/images/let_there_be_love.jpg", file: "rock_n_roll_star_live.mp3" },
-
-  // Lord Don't Slow Me Down
-  { title: "Lord Don't Slow Me Down", album: "(i think it's just a single lmao)", image: "/images/lord_dont_slow_me_down.jpg", file: "lord_dont_slow_me_down.mp3" },
-  { title: "The Meaning Of Soul (Live at City of Manchester Stadium '05)", album: "B-Sides", image: "/images/lord_dont_slow_me_down.jpg", file: "the_meaning_of_soul_live.mp3" },
-  { title: "Don't Look Back In Anger (Live at City of Manchester Stadium '05)", album: "B-Sides", image: "/images/lord_dont_slow_me_down.jpg", file: "dont_look_back_in_anger_live.mp3" },
-
-  // The Shock Of The Lightning
-  { title: "Falling Down (The Chemical Brothers Remix)", album: "B-Sides", image: "/images/falling_down.jpg", file: "falling_down_chemical_brothers_remix.mp3" },
-
-  // I'm Outta Time
-  { title: "I'm Outta Time (Remix)", album: "B-Sides", image: "/images/im_outta_time.jpg", file: "im_outta_time_remix.mp3" },
-  { title: "The Shock Of The Lightning (The Jagz Kooner Remix)", album: "B-Sides", image: "/images/the_shock_of_the_lightning.jpg", file: "the_shock_of_the_lightning_jagz_kooner_remix.mp3" },
-
-  // Falling Down
-  { title: "Those Swollen Hand Blues", album: "B-Sides", image: "/images/falling_down.jpg", file: "those_swollen_hand_blues.mp3" },
-  { title: "Falling Down (The Gibb Mix)", album: "B-Sides", image: "/images/falling_down.jpg", file: "falling_down_the_gibb_mix.mp3" },
-  { title: "Falling Down (The Prodigy Version)", album: "B-Sides", image: "/images/falling_down.jpg", file: "falling_down_the_prodigy_version.mp3" }
+  // Unreleased tracks ('91-'93)
+  { title: "Alice", file: "alice.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
+  { title: "Take Me", file: "take_me.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
+  { title: "Reminisce", file: "reminisce.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
+  { title: "Colour My Life", file: "colour_my_life.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
+  { title: "Take Me (Abraham Moss)", file: "take_me_abraham_moss.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
+  { title: "See The Sun", file: "see_the_sun.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
+  { title: "Must Be The Music", file: "must_be_the_music.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
+  { title: "Better Let You Know", file: "better_let_you_know.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
+  { title: "Snakebite", file: "snakebite.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
+  { title: "Must Be The Music (Live at the Boardwalk)", file: "must_be_the_music_live.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
+  { title: "Take Me (Live at the Boardwalk)", file: "take_me_boardwalk.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
+  { title: "Life In Vain", file: "life_in_vain.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
+  { title: "I Will Show", file: "i_will_show.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
+  { title: "Better Let You Know (Live at the Boardwalk)", file: "better_let_you_know_live.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
+  { title: "Must Be The Music (Rehearsal Demo)", file: "must_be_the_music_rehearsal.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
+  { title: "Lock All The Doors", file: "lock_all_the_doors.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
+  { title: "Setting Sun (Comin' On Strong)", file: "setting_sun.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true }
 ]
 
 const CLIP_LENGTHS = [1, 3, 5, 10, 30]
@@ -214,7 +194,7 @@ const CLIP_LENGTHS = [1, 3, 5, 10, 30]
 function normalizeSong(song) {
   return song
     .toLowerCase()
-    .replace(/&/g, 'and') // Automatically converts '&' to 'and'
+    .replace(/&/g, 'and')
     .replace(/[^a-z0-9\s]/g, '')
     .replace(/\s+/g, ' ')
     .trim()
@@ -244,6 +224,16 @@ function App() {
   const [status, setStatus] = useState('ready')
   const [isPlayingAudio, setIsPlayingAudio] = useState(false)
 
+  const [includeBonus, setIncludeBonus] = useState(() => {
+    return localStorage.getItem('oasis_heardle_bonus') === 'true'
+  })
+  const [includeUnreleased, setIncludeUnreleased] = useState(() => {
+    return localStorage.getItem('oasis_heardle_unreleased') === 'true'
+  })
+  const [includeBsides, setIncludeBsides] = useState(() => {
+    return localStorage.getItem('oasis_heardle_bsides') === 'true'
+  })
+
   const [streak, setStreak] = useState(() => {
     return parseInt(localStorage.getItem('oasis_heardle_streak') || '0', 10)
   })
@@ -257,8 +247,62 @@ function App() {
   const timeoutRef = useRef(null)
   const inputRef = useRef(null)
 
+  const activeSongPool = studioSongs.filter(song => {
+    if (song.isBonus && !includeBonus) return false
+    if (song.isUnreleased && !includeUnreleased) return false
+    if (song.isBside && !includeBsides) return false
+    return true
+  })
+
+  const activeUsedCount = usedSongs.filter(title =>
+    activeSongPool.some(song => song.title === title)
+  ).length
+
+  function toggleBonusTracks() {
+    const nextValue = !includeBonus
+    setIncludeBonus(nextValue)
+    localStorage.setItem('oasis_heardle_bonus', String(nextValue))
+
+    if (!nextValue && answerObj?.isBonus) {
+      resetActiveRound()
+    }
+  }
+
+  function toggleUnreleasedTracks() {
+    const nextValue = !includeUnreleased
+    setIncludeUnreleased(nextValue)
+    localStorage.setItem('oasis_heardle_unreleased', String(nextValue))
+
+    if (!nextValue && answerObj?.isUnreleased) {
+      resetActiveRound()
+    }
+  }
+
+  function toggleBsidesTracks() {
+    const nextValue = !includeBsides
+    setIncludeBsides(nextValue)
+    localStorage.setItem('oasis_heardle_bsides', String(nextValue))
+
+    if (!nextValue && answerObj?.isBside) {
+      resetActiveRound()
+    }
+  }
+
+  function resetActiveRound() {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current)
+    if (audioRef.current) {
+      audioRef.current.pause()
+      audioRef.current.currentTime = 0
+    }
+    setIsPlayingAudio(false)
+    setAnswerObj(null)
+    setGuesses([])
+    setGuess('')
+    setStatus('ready')
+  }
+
   function startRound() {
-    const availablePool = studioSongs.filter(song => !usedSongs.includes(song.title))
+    const availablePool = activeSongPool.filter(song => !usedSongs.includes(song.title))
 
     if (availablePool.length === 0) {
       setStatus('completed')
@@ -339,7 +383,7 @@ function App() {
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [status, clipLength])
+  }, [status, clipLength, includeBonus, includeUnreleased, includeBsides])
 
   function handleClipSelect(length, index) {
     if (index <= unlockedIndex) {
@@ -367,7 +411,6 @@ function App() {
     setGuesses(updatedGuesses)
     setGuess('')
 
-    // 👇 Blurs the typing bar immediately upon submitting a guess
     if (inputRef.current) {
       inputRef.current.blur()
     }
@@ -385,7 +428,7 @@ function App() {
         localStorage.setItem('oasis_heardle_max_streak', newStreak)
       }
 
-      const remainingPool = studioSongs.filter(song => !updatedUsedSongs.includes(song.title))
+      const remainingPool = activeSongPool.filter(song => !updatedUsedSongs.includes(song.title))
 
       if (remainingPool.length === 0) {
         setStatus('completed')
@@ -430,7 +473,7 @@ function App() {
       <header className="header">
         <div className="logo">oasis<span> heardle</span></div>
         <div className="header-progress">
-          <strong>{usedSongs.length}</strong> / {studioSongs.length}
+          <strong>{activeUsedCount}</strong> / {activeSongPool.length}
         </div>
         <div className="header-stats">
           streak: <strong>{streak}</strong> &nbsp; best: <strong>{maxStreak}</strong>
@@ -448,7 +491,7 @@ function App() {
               onMouseEnter={(e) => { e.currentTarget.src = "/images/liam_noel_venice.jpg" }}
               onMouseLeave={(e) => { e.currentTarget.src = "/images/liam_noel_90s.jpg" }}
             />
-            <p>you actually guessed all {studioSongs.length} songs and b-sides.</p>
+            <p>you actually guessed all {activeSongPool.length} songs and b-sides.</p>
             <p>now you can go on twitter and show this as proof you deserve your tickets.</p>
             <button
               className="start-button"
@@ -485,9 +528,37 @@ function App() {
             </div>
 
             {status === 'ready' ? (
-              <button className="start-button" onClick={startRound}>
-                start
-              </button>
+              <>
+                <button className="start-button" onClick={startRound}>
+                  start
+                </button>
+
+                <div className="mode-toggles">
+                  <button
+                    type="button"
+                    className={`mode-button ${includeBonus ? 'active' : ''}`}
+                    onClick={toggleBonusTracks}
+                  >
+                    bonus: {includeBonus ? 'ON' : 'OFF'}
+                  </button>
+
+                  <button
+                    type="button"
+                    className={`mode-button ${includeUnreleased ? 'active' : ''}`}
+                    onClick={toggleUnreleasedTracks}
+                  >
+                    unreleased: {includeUnreleased ? 'ON' : 'OFF'}
+                  </button>
+
+                  <button
+                    type="button"
+                    className={`mode-button ${includeBsides ? 'active' : ''}`}
+                    onClick={toggleBsidesTracks}
+                  >
+                    b-sides: {includeBsides ? 'ON' : 'OFF'}
+                  </button>
+                </div>
+              </>
             ) : (
               <>
                 <div className="clip-options">
