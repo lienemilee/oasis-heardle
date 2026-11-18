@@ -270,12 +270,9 @@ function App() {
   const timeoutRef = useRef(null)
   const inputRef = useRef(null)
 
-  const activeSongPool = studioSongs.filter(song => {
-  if (song.isBonus && !includeBonus) return false
-  if (song.isUnreleased && !includeUnreleased) return false
-  if (song.isBside && !includeBsides) return false
-  return true
-})
+  const activeSongPool = studioSongs.filter(
+  song => song.title === "Falling Down"
+)
 
   const matchingSongs = !showHints || guess.trim() === '' || status !== 'playing'
     ? []
