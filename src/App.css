@@ -75,7 +75,7 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  margin: auto 0;
+  margin: 16px 0;
 }
 
 .audio-box {
