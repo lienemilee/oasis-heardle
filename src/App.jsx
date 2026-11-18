@@ -171,7 +171,6 @@ const studioSongs = [
 
   // Unreleased tracks ('91-'93)
   { title: "Alice", file: "alice.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
-  { title: "Take Me", file: "take_me.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
   { title: "Reminisce", file: "reminisce.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
   { title: "Colour My Life", file: "colour_my_life.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
   { title: "Take Me (Abraham Moss)", file: "take_me_abraham_moss.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
@@ -272,11 +271,11 @@ function App() {
   const inputRef = useRef(null)
 
   const activeSongPool = studioSongs.filter(song => {
-    if (song.isBonus && !includeBonus) return false
-    if (song.isUnreleased && !includeUnreleased) return false
-    if (song.isBside && !includeBsides) return false
-    return true
-  })
+  if (song.isBonus && !includeBonus) return false
+  if (song.isUnreleased && !includeUnreleased) return false
+  if (song.isBside && !includeBsides) return false
+  return true
+})
 
   const matchingSongs = !showHints || guess.trim() === '' || status !== 'playing'
     ? []
@@ -342,6 +341,8 @@ function App() {
     }
 
     const randomSong = availablePool[Math.floor(Math.random() * availablePool.length)]
+
+    setUsedSongs(prev => [...prev, randomSong.title])
 
     setAnswerObj(randomSong)
     setGuess('')
