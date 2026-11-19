@@ -167,19 +167,18 @@ const studioSongs = [
   { title: "If We Shadows (Demo)", file: "if_we_shadows.mp3", album: "Be Here Now (Bonus)", image: "/images/be_here_now.jpg", isBonus: true },
   { title: "Help! (Live in LA)", file: "help_live_la.mp3", album: "Morning Glory (Bonus)", image: "/images/morning_glory.jpg", isBonus: true },
   { title: "If We Shadows", file: "if_we_shadows_full_band.mp3", album: "Be Here Now (Bonus)", image: "/images/be_here_now.jpg", isBonus: true },
-  { title: "Song 2", file: "song_2.mp3", album: "Blur", image: "/images/blur.jpg", isBonus: true },
+  { title: "Song 2", file: "song_2.mp3", album: "Blur", image: "/images/blur.jpg", isBonus: true, isHidden: true },
 
   // Unreleased tracks ('91-'93)
   { title: "Alice", file: "alice.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
   { title: "Reminisce", file: "reminisce.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
   { title: "Colour My Life", file: "colour_my_life.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
-  { title: "Take Me (Abraham Moss)", file: "take_me_abraham_moss.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
+  { title: "Take Me", file: "take_me_abraham_moss.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
   { title: "See The Sun", file: "see_the_sun.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
   { title: "Must Be The Music", file: "must_be_the_music.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
   { title: "Better Let You Know", file: "better_let_you_know.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
   { title: "Snakebite", file: "snakebite.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
   { title: "Must Be The Music (Live at the Boardwalk)", file: "must_be_the_music_live.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
-  { title: "Take Me (Live at the Boardwalk)", file: "take_me_boardwalk.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
   { title: "Life In Vain", file: "life_in_vain.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
   { title: "I Will Show", file: "i_will_show.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
   { title: "Better Let You Know (Live at the Boardwalk)", file: "better_let_you_know_live.mp3", album: "Unreleased", image: "/images/oasis_1991.jpg", isUnreleased: true },
@@ -271,21 +270,22 @@ function App() {
   const inputRef = useRef(null)
 
   const activeSongPool = studioSongs.filter(song => {
+  if (song.isHidden) return false
   if (song.isBonus && !includeBonus) return false
   if (song.isUnreleased && !includeUnreleased) return false
   if (song.isBside && !includeBsides) return false
   return true
 })
 
-  const matchingSongs = !showHints || guess.trim() === '' || status !== 'playing'
-    ? []
-    : activeSongPool.filter(song =>
-        song.title.toLowerCase().includes(guess.toLowerCase())
-      ).slice(0, 6)
+const matchingSongs = !showHints || guess.trim() === '' || status !== 'playing'
+  ? []
+  : activeSongPool.filter(song =>
+      !song.isHidden && song.title.toLowerCase().includes(guess.toLowerCase())
+    ).slice(0, 6)
 
-  const activeUsedCount = usedSongs.filter(title =>
-    activeSongPool.some(song => song.title === title)
-  ).length
+const activeUsedCount = usedSongs.filter(title =>
+  activeSongPool.some(song => song.title === title)
+).length
 
   function toggleBonusTracks() {
     const nextValue = !includeBonus
